@@ -2,7 +2,7 @@ export default function Options({ question }) {
   return (
     <div className="options">
       {question.options.map((option) => (
-        <Option option={option} key={option} />
+        <Option option={option} key={option}  />
       ))}
     </div>
   );
