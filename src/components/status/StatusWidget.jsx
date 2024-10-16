@@ -3,6 +3,7 @@ import Error from "./Error";
 import { Ready } from "./Ready";
 import Question from "../Question";
 import NextButton from "../NextButton";
+import Progress from "../Progress";
 
 export function StatusWidget(props) {
   const { status } = props;
@@ -21,12 +22,24 @@ export function StatusWidget(props) {
   if (status === "active") {
     return (
       <>
+        <Progress
+          index={props.index}
+          questionsLength={props.questionsLength}
+          points={props.points}
+          totalPoints={props.totalPoints}
+          answer={props.answer}
+        />
         <Question
           question={props.question}
           dispatch={props.dispatch}
           answer={props.answer}
         />
-        <NextButton dispatch={props.dispatch} answer={props.answer} />
+        <NextButton
+          dispatch={props.dispatch}
+          answer={props.answer}
+          index={props.index}
+          questionsLength={props.questionsLength}
+        />
       </>
     );
   }

@@ -1,5 +1,11 @@
-export default function NextButton({ dispatch, answer }) {
+export default function NextButton({
+  dispatch,
+  answer,
+  index,
+  questionsLength,
+}) {
   if (answer === null) return null;
+  if (index + 1 === questionsLength) return;
   return (
     <button
       className="btn btn-ui"

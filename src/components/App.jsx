@@ -48,9 +48,12 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status, index, answer } = state;
+  const { questions, status, index, answer, points } = state;
 
   const questionsLength = questions.length;
+  const totalPoints = questions.reduce((acc, q) => {
+    return acc + q.points;
+  }, 0);
   useEffect(() => {
     async function getQuestions() {
       try {
@@ -73,6 +76,9 @@ function App() {
           dispatch={dispatch}
           question={questions[index]}
           answer={answer}
+          index={index}
+          points={points}
+          totalPoints={totalPoints}
         />
       </Main>
     </div>
