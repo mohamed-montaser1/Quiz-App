@@ -3,7 +3,8 @@ import Error from "./Error";
 import { Ready } from "./Ready";
 import Question from "../Question";
 
-export function StatusWidget({ status, questionsLength, dispatch }) {
+export function StatusWidget(props) {
+  const { status } = props;
   if (status === "loading") {
     return <Loader />;
   }
@@ -13,10 +14,10 @@ export function StatusWidget({ status, questionsLength, dispatch }) {
   }
 
   if (status === "ready") {
-    return <Ready length={questionsLength} dispatch={dispatch} />;
+    return <Ready length={props.questionsLength} dispatch={props.dispatch} />;
   }
 
   if (status === "active") {
-    return <Question />;
+    return <Question question={props.question} />;
   }
 }

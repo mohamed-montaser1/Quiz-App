@@ -1,12 +1,13 @@
 import { useEffect, useReducer } from "react";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import { StatusWidget } from "./components/status/StatusWidget";
+import Header from "./Header";
+import Main from "./Main";
+import { StatusWidget } from "./status/StatusWidget";
 
 const initialState = {
   questions: [],
   // valid status ==> 'loading', 'error', 'ready', 'active', 'finished'
   status: "loading",
+  index: 0,
 };
 
 function reducer(state, action) {
@@ -34,7 +35,7 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status } = state;
+  const { questions, status, index } = state;
 
   const questionsLength = questions.length;
   useEffect(() => {
@@ -57,6 +58,7 @@ function App() {
           status={status}
           questionsLength={questionsLength}
           dispatch={dispatch}
+          question={questions[index]}
         />
       </Main>
     </div>
