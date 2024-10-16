@@ -22,6 +22,11 @@ function reducer(state, action) {
         ...state,
         status: "error",
       };
+    case "start":
+      return {
+        ...state,
+        status: "active",
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -48,7 +53,11 @@ function App() {
     <div className="app">
       <Header />
       <Main>
-        <StatusWidget status={status} questionsLength={questionsLength} />
+        <StatusWidget
+          status={status}
+          questionsLength={questionsLength}
+          dispatch={dispatch}
+        />
       </Main>
     </div>
   );
