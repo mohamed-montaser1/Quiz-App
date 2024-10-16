@@ -18,6 +18,12 @@ export function StatusWidget(props) {
   }
 
   if (status === "active") {
-    return <Question question={props.question} />;
+    return (
+      <Question
+        question={props.question}
+        dispatch={props.dispatch}
+        answer={props.answer}
+      />
+    );
   }
 }
