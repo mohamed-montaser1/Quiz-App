@@ -3,6 +3,8 @@ import Header from "./Header";
 import Main from "./Main";
 import { StatusWidget } from "./status/StatusWidget";
 
+const SECONDS_PER_QUESTION = 30;
+
 const initialState = {
   questions: [],
   // valid status ==> 'loading', 'error', 'ready', 'active', 'finished'
@@ -11,6 +13,7 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
+  secondsRemaining: null,
 };
 
 function reducer(state, action) {
@@ -30,6 +33,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: "active",
+        secondsRemaining: state.questions.length * SECONDS_PER_QUESTION,
       };
     case "newAnswer":
       const question = state.questions[state.index];
@@ -53,6 +57,13 @@ function reducer(state, action) {
         status: "ready",
         highscore: state.highscore,
       };
+    case "tick":
+      const { secondsRemaining, status } = state;
+      return {
+        ...state,
+        secondsRemaining: secondsRemaining - 1,
+        status: secondsRemaining === 0 ? "finished" : status,
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -60,7 +71,15 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status, index, answer, points, highscore } = state;
+  const {
+    questions,
+    status,
+    index,
+    answer,
+    points,
+    highscore,
+    secondsRemaining,
+  } = state;
   const questionsLength = questions.length;
   const totalPoints = questions.reduce((acc, q) => {
     return acc + q.points;
@@ -91,6 +110,7 @@ function App() {
           points={points}
           totalPoints={totalPoints}
           highscore={highscore}
+          secondsRemaining={secondsRemaining}
         />
       </Main>
     </div>

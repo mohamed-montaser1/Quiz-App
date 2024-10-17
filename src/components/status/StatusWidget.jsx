@@ -5,6 +5,8 @@ import Question from "../Question";
 import NextButton from "../NextButton";
 import Progress from "../Progress";
 import Finished from "./Finished";
+import Footer from "../Footer";
+import Timer from "../Timer";
 
 export function StatusWidget(props) {
   const { status } = props;
@@ -35,12 +37,15 @@ export function StatusWidget(props) {
           dispatch={props.dispatch}
           answer={props.answer}
         />
-        <NextButton
-          dispatch={props.dispatch}
-          answer={props.answer}
-          index={props.index}
-          questionsLength={props.questionsLength}
-        />
+        <Footer>
+          <Timer dispatch={props.dispatch} secondsRemaining={props.secondsRemaining} />
+          <NextButton
+            dispatch={props.dispatch}
+            answer={props.answer}
+            index={props.index}
+            questionsLength={props.questionsLength}
+          />
+        </Footer>
       </>
     );
   }
