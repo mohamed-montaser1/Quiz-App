@@ -1,4 +1,4 @@
-export default function Finished({ points, totalPoints, highscore }) {
+export default function Finished({ points, totalPoints, highscore, dispatch }) {
   const percentage = (points / totalPoints) * 100;
   let emoji = "";
 
@@ -13,7 +13,15 @@ export default function Finished({ points, totalPoints, highscore }) {
         <span>{emoji}</span> You scored <strong>{points}</strong> out of{" "}
         {totalPoints} ({Math.ceil(percentage)}%)
       </p>
-      <p className="highscore">(Highscore: {highscore === 0 ? points : highscore} points)</p>
+      <p className="highscore">
+        (Highscore: {highscore === 0 ? points : highscore} points)
+      </p>
+      <button
+        className="btn btn-ui"
+        onClick={() => dispatch({ type: "restart" })}
+      >
+        Restart
+      </button>
     </>
   );
 }

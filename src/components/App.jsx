@@ -46,6 +46,13 @@ function reducer(state, action) {
       const { highscore, points } = state;
       const new_high_score = points > highscore ? points : highscore;
       return { ...state, status: "finished", highscore: new_high_score };
+    case "restart":
+      return {
+        ...initialState,
+        questions: state.questions,
+        status: "ready",
+        highscore: state.highscore,
+      };
     default:
       throw new Error("Unknown action");
   }

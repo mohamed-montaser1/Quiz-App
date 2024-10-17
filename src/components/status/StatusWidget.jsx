@@ -51,6 +51,7 @@ export function StatusWidget(props) {
         points={props.points}
         totalPoints={props.totalPoints}
         highscore={props.highscore}
+        dispatch={props.dispatch}
       />
     );
   }
